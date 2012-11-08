@@ -1,10 +1,11 @@
 # Submission for kaggle-stackoverflow challenge
 # Marco Lui, October 2012
 .PHONY: clean validate fullval
-TRAIN=../../data/train.csv
-CHECK=../../data/train-tiny.csv
-TEST=../../data/public_leaderboard.csv
-VALIDATE=../../data/train-sample.csv
+DATADIR=/lt/work/mlui/envs/kaggle-so/data
+TRAIN=${DATADIR}/train_October_9_2012.csv
+CHECK=${DATADIR}/train-tiny.csv
+TEST=${DATADIR}/private_leaderboard.csv
+VALIDATE=${DATADIR}/train-sample_October_9_2012_v2.csv
 
 PARAMS=--loss_function logistic --oaa 5 --quiet ${ARGS}
 
@@ -46,7 +47,7 @@ validate: validate.vw
 	parallel "python sigmoid_mc.py {} {.}.csv" ::: validate.*.pred
 	parallel "python evaluate.py {.}.fold {}" ::: validate.*.csv | paste -sd+ | bc
 	
-fullval: 
+fullval: train.vw
 	split -n r/10 train.vw rain.
 	parallel "mv {} t{}.fold" ::: rain.*
 	parallel "find . -name 'train.*.fold' ! -name {} | xargs cat | vw $(PARAMS) -f {.}.model" ::: train.*.fold
