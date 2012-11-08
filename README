@@ -1,0 +1,8 @@
+Code submission for Kaggle Stack Overflow challenge
+Initial development was based on
+http://fastml.com/predicting-closed-questions-on-stack-overflow/
+
+And some of the code is derived from there. The data extraction (data2vw.py)
+was rewritten from scratch, integrating the two scripts from the above post.
+
+Marco Lui, October 2012
