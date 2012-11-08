@@ -17,7 +17,6 @@ from dateutil import parser as dateparser
 
 import os
 
-STOPWORDS = set([l.strip() for l in open('stopword')])
 CLASSES = [ 'not a real question', 'not constructive', 'off topic', 'open', 'too localized']
 status = dict( (k, str(i+1)) for i,k in enumerate(CLASSES))
 
@@ -217,7 +216,6 @@ def row2wv(row):
   return outline
 
 from itertools import imap
-import pdbhook
 
 from timeit import default_timer
 class Timer(object):
